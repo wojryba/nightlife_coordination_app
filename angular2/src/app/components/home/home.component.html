@@ -1,0 +1,30 @@
+<div>
+  <h1>Plans tonight?</h1>
+  <h4>See which bars are hoppin' tonight and RSVP ahead of time!<br>
+Remember: take a cab and drink responsibly.</h4>
+</div>
+<button class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
+
+
+<div>
+  <form novalidate (ngSubmit)="onSubmit(form)" [formGroup]="form">
+    <input type="text" formControlName="location">
+    <button type="submit">Go</button>
+  </form>
+</div>
+
+<div class="places">
+  <div class="onePlace" *ngFor="let location of locations, let i=index">
+    <div class="placeInfo">
+      <button (click)="onClick(i)" *ngIf="auth.authenticated()">{{location.counter}} Going</button>
+      <button (click)="auth.login()" *ngIf="!auth.authenticated()">{{location.counter}} Going</button>
+
+      <h1>{{location.name}}</h1>
+      <p>Rating :{{location.rating}}</p>
+      <p>Pricing: {{location.price}}</p>
+    </div>
+    <figure class="image">
+      <img src={{location.image_url}} alt={{location.id}}/>
+    </figure>
+  </div>
+</div>

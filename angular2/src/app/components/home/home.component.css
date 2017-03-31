@@ -1,0 +1,31 @@
+.places{
+    margin: auto;
+    width: 80%;
+}
+
+.onePlace {
+    border: solid #FFFFFF;
+    border-radius: 2%;
+    margin: 5px;
+    text-align: left;
+    min-height: 250px;
+    padding: 0px;
+}
+
+.image {
+  width: 30%;
+  padding: 3px;
+}
+
+.placeInfo {
+  min-height: 250px;
+  clear: both;
+  float: right;
+  width: 65%;
+}
+
+img {
+  max-height: 250px;
+  width: 100%
+
+}
