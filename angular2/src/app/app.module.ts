@@ -9,7 +9,6 @@ import { HomeComponent } from './components/home/home.component';
 
 import { ApiServiceService } from './services/api-service.service';
 import { AuthService } from './services/auth.service';
-import { StoreService } from './services/store.service';
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -27,7 +26,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [ApiServiceService, AuthService, StoreService, {
+  providers: [ApiServiceService, AuthService, {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
       deps: [ Http, RequestOptions ]

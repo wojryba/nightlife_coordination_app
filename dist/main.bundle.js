@@ -30,13 +30,13 @@ var ApiServiceService = (function () {
         var data = JSON.stringify({ location: location });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json;charset=utf-8' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
-        return this.http.post('http://localhost:3000/api/search', data, options);
+        return this.http.post('/api/search', data, options);
     };
     ApiServiceService.prototype.addToPlace = function (place) {
         var data = JSON.stringify({ place: place });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json;charset=utf-8' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
-        return this.authHttp.post('http://localhost:3000/api/add', data, options);
+        return this.authHttp.post('/api/add', data, options);
     };
     ApiServiceService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(), 
@@ -122,7 +122,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(385);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(406);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(409);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(408);
 
 
 
@@ -158,8 +158,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-root',
-            template: __webpack_require__(466),
-            styles: [__webpack_require__(463)]
+            template: __webpack_require__(465),
+            styles: [__webpack_require__(462)]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
@@ -183,7 +183,6 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_home_home_component__ = __webpack_require__(407);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_api_service_service__ = __webpack_require__(278);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_auth_service__ = __webpack_require__(279);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_store_service__ = __webpack_require__(408);
 /* unused harmony export authHttpServiceFactory */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -195,7 +194,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -223,7 +221,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* ReactiveFormsModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["HttpModule"]
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_7__services_api_service_service__["a" /* ApiServiceService */], __WEBPACK_IMPORTED_MODULE_8__services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_9__services_store_service__["a" /* StoreService */], {
+            providers: [__WEBPACK_IMPORTED_MODULE_7__services_api_service_service__["a" /* ApiServiceService */], __WEBPACK_IMPORTED_MODULE_8__services_auth_service__["a" /* AuthService */], {
                     provide: __WEBPACK_IMPORTED_MODULE_4_angular2_jwt__["AuthHttp"],
                     useFactory: authHttpServiceFactory,
                     deps: [__WEBPACK_IMPORTED_MODULE_3__angular_http__["Http"], __WEBPACK_IMPORTED_MODULE_3__angular_http__["RequestOptions"]]
@@ -310,8 +308,8 @@ var HomeComponent = (function () {
     HomeComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-home',
-            template: __webpack_require__(467),
-            styles: [__webpack_require__(464)],
+            template: __webpack_require__(466),
+            styles: [__webpack_require__(463)],
             animations: [
                 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('enterAnimation', [
                     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["transition"])(':enter', [
@@ -334,35 +332,6 @@ var HomeComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StoreService; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var StoreService = (function () {
-    function StoreService() {
-    }
-    StoreService = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(), 
-        __metadata('design:paramtypes', [])
-    ], StoreService);
-    return StoreService;
-}());
-//# sourceMappingURL=store.service.js.map
-
-/***/ }),
-
-/***/ 409:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 // The file contents for the current environment will overwrite these during build.
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
@@ -375,7 +344,7 @@ var environment = {
 
 /***/ }),
 
-/***/ 463:
+/***/ 462:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(120)();
@@ -393,7 +362,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 464:
+/***/ 463:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(120)();
@@ -411,21 +380,21 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 466:
+/***/ 465:
 /***/ (function(module, exports) {
 
 module.exports = "<app-home></app-home>\n"
 
 /***/ }),
 
-/***/ 467:
+/***/ 466:
 /***/ (function(module, exports) {
 
 module.exports = "<div>\n  <h1>Plans tonight?</h1>\n  <h4>See which bars are hoppin' tonight and RSVP ahead of time!<br>\nRemember: take a cab and drink responsibly.</h4>\n</div>\n<button class=\"btn btn-primary btn-margin\" (click)=\"auth.logout()\" *ngIf=\"auth.authenticated()\">Log Out</button>\n\n\n<div class=\"form\">\n  <form novalidate (ngSubmit)=\"onSubmit(form)\" [formGroup]=\"form\">\n    <input type=\"text\" placeholder=\"WHERE YOU AT?\" formControlName=\"location\">\n    <button type=\"submit\">Find</button>\n  </form>\n</div>\n\n<div class=\"places\">\n  <div class=\"onePlace\" *ngFor=\"let location of locations, let i=index\" [@enterAnimation]>\n    <div class=\"placeInfo\">\n      <button (click)=\"onClick(i)\" *ngIf=\"auth.authenticated()\">{{location.counter}} Going</button>\n      <button (click)=\"auth.login()\" *ngIf=\"!auth.authenticated()\">{{location.counter}} Going</button>\n\n      <h1>{{location.name}}</h1>\n      <p>Rating :{{location.rating}}</p>\n      <p>Pricing: {{location.price}}</p>\n    </div>\n    <figure class=\"image\">\n      <img src={{location.image_url}} alt={{location.id}}/>\n    </figure>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ 488:
+/***/ 487:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(299);
@@ -433,5 +402,5 @@ module.exports = __webpack_require__(299);
 
 /***/ })
 
-},[488]);
+},[487]);
 //# sourceMappingURL=main.bundle.js.map

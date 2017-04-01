@@ -2,11 +2,6 @@ import { Component, Input, OnInit, OnDestroy, trigger, state, style, animate, tr
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApiServiceService } from '../../services/api-service.service';
 import { AuthService } from '../../services/auth.service';
-import { StoreService } from '../../services/store.service';
-
-interface AppState {
-  reducer: any;
-}
 
 
 @Component({
