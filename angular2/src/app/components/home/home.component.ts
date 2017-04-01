@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, trigger, state, style, animate, transition } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApiServiceService } from '../../services/api-service.service';
 import { AuthService } from '../../services/auth.service';
@@ -12,7 +12,17 @@ interface AppState {
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    trigger(
+      'enterAnimation', [
+        transition(':enter', [
+          style({transform: 'translateY(-15%)', opacity: 0}),
+          animate('500ms', style({transform: 'translateY(0%)', opacity: 1}))
+        ])
+      ]
+    )
+  ]
 })
 export class HomeComponent implements OnInit, OnDestroy {
   public form: FormGroup;

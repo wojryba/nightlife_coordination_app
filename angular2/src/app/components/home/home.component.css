@@ -1,6 +1,51 @@
+.form {
+  margin-bottom: 50px;
+}
+
+.form input, button {
+  background: none;
+  border: 2px solid #FFFFFF;
+  border-radius: 2%;
+  margin: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.form input {
+  width: 30%;
+  color: #FFFFFF;
+}
+
+/* placeholder colorint */
+::-webkit-input-placeholder { /* Chrome */
+  color: #FFFFFF;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #FFFFFF;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #FFFFFF;
+  opacity: 1;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: #FFFFFF;
+  opacity: 1;
+}
+
+.form button {
+  width: 5%;
+  color: #FFFFFF;
+}
+
 .places{
     margin: auto;
     width: 80%;
+}
+
+.places button {
+  color: #FFFFFF;
+  width: 10%;
+  padding: 5px;
 }
 
 .onePlace {

@@ -6,15 +6,15 @@ Remember: take a cab and drink responsibly.</h4>
 <button class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
 
 
-<div>
+<div class="form">
   <form novalidate (ngSubmit)="onSubmit(form)" [formGroup]="form">
-    <input type="text" formControlName="location">
-    <button type="submit">Go</button>
+    <input type="text" placeholder="WHERE YOU AT?" formControlName="location">
+    <button type="submit">Find</button>
   </form>
 </div>
 
 <div class="places">
-  <div class="onePlace" *ngFor="let location of locations, let i=index">
+  <div class="onePlace" *ngFor="let location of locations, let i=index" [@enterAnimation]>
     <div class="placeInfo">
       <button (click)="onClick(i)" *ngIf="auth.authenticated()">{{location.counter}} Going</button>
       <button (click)="auth.login()" *ngIf="!auth.authenticated()">{{location.counter}} Going</button>
