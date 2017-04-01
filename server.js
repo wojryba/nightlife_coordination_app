@@ -23,7 +23,7 @@ const app = express();
 app.use(cors());
 
 //set static folder for anfular2 files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 //add middleware bodyparser
 app.use(bodyParser.json());
@@ -36,9 +36,9 @@ const api = require('./api')
 app.use('/api', api);
 
 //redirect to angulr all the routes
-/*app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'));
-});*/
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
 
 
 //start server
