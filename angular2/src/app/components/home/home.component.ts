@@ -39,18 +39,26 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getQuery() {
     if (this.auth.authenticated()) {
-      this.locations = JSON.parse(localStorage.getItem('locations'));
+      let query = JSON.parse(localStorage.getItem('query'));
+      this.data.getSearchResults(query).subscribe(
+        resonse => {
+          this.locations = JSON.parse(resonse['_body']);
+          console.log(this.locations);
+        },
+        error => console.log(error),
+        () => console.log("cmoplete")
+      )
     } else {
       console.log("not loged in");
     }
   }
 
   onSubmit(){
+    localStorage.setItem('query', JSON.stringify(this.form.value.location));
     this.data.getSearchResults(this.form.value.location).subscribe(
       resonse => {
         this.locations = JSON.parse(resonse['_body']);
         console.log(this.locations);
-        localStorage.setItem('locations', JSON.stringify(this.locations));
       },
       error => console.log(error),
       () => console.log("cmoplete")

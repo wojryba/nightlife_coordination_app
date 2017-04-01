@@ -36,7 +36,7 @@ var ApiServiceService = (function () {
         var data = JSON.stringify({ place: place });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json;charset=utf-8' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
-        return this.authHttp.post('/api/add', data, options);
+        return this.authHttp.post('api/add', data, options);
     };
     ApiServiceService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(), 
@@ -274,8 +274,13 @@ var HomeComponent = (function () {
     HomeComponent.prototype.ngOnDestroy = function () {
     };
     HomeComponent.prototype.getQuery = function () {
+        var _this = this;
         if (this.auth.authenticated()) {
-            this.locations = JSON.parse(localStorage.getItem('locations'));
+            var query = JSON.parse(localStorage.getItem('query'));
+            this.data.getSearchResults(query).subscribe(function (resonse) {
+                _this.locations = JSON.parse(resonse['_body']);
+                console.log(_this.locations);
+            }, function (error) { return console.log(error); }, function () { return console.log("cmoplete"); });
         }
         else {
             console.log("not loged in");
@@ -283,10 +288,10 @@ var HomeComponent = (function () {
     };
     HomeComponent.prototype.onSubmit = function () {
         var _this = this;
+        localStorage.setItem('query', JSON.stringify(this.form.value.location));
         this.data.getSearchResults(this.form.value.location).subscribe(function (resonse) {
             _this.locations = JSON.parse(resonse['_body']);
             console.log(_this.locations);
-            localStorage.setItem('locations', JSON.stringify(_this.locations));
         }, function (error) { return console.log(error); }, function () { return console.log("cmoplete"); });
     };
     HomeComponent.prototype.onClick = function (i) {
@@ -370,7 +375,7 @@ exports = module.exports = __webpack_require__(120)();
 
 
 // module
-exports.push([module.i, "button {\n  color: #FFFFFF;\n}\n\n.form {\n  margin-bottom: 50px;\n}\n\n.form input, button {\n  background: none;\n  border: 2px solid #FFFFFF;\n  border-radius: 2%;\n  margin: 5px;\n  text-align: center;\n  font-weight: bold;\n}\n\n.form input {\n  width: 30%;\n  color: #FFFFFF;\n}\n\n/* placeholder colorint */\n::-webkit-input-placeholder { /* Chrome */\n  color: #FFFFFF;\n}\n:-ms-input-placeholder { /* IE 10+ */\n  color: #FFFFFF;\n}\n::-moz-placeholder { /* Firefox 19+ */\n  color: #FFFFFF;\n  opacity: 1;\n}\n:-moz-placeholder { /* Firefox 4 - 18 */\n  color: #FFFFFF;\n  opacity: 1;\n}\n\n.form button {\n  width: 5%;\n}\n\n.places{\n    margin: auto;\n    width: 80%;\n}\n\n.places button {\n  color: #FFFFFF;\n  width: 10%;\n  padding: 5px;\n}\n\n.onePlace {\n    border: solid #FFFFFF;\n    border-radius: 2%;\n    margin: 5px;\n    text-align: left;\n    min-height: 250px;\n    padding: 0px;\n}\n\n.image {\n  width: 30%;\n  padding: 3px;\n}\n\n.placeInfo {\n  min-height: 250px;\n  clear: both;\n  float: right;\n  width: 65%;\n}\n\nimg {\n  max-height: 250px;\n  width: 100%\n\n}\n", ""]);
+exports.push([module.i, "button {\n  color: #FFFFFF;\n}\n\n.form {\n  margin-bottom: 50px;\n}\n\n.form input, button {\n  background: none;\n  border: 2px solid #FFFFFF;\n  border-radius: 2%;\n  margin: 5px;\n  text-align: center;\n  font-weight: bold;\n}\n\n.form input {\n  width: 30%;\n  color: #FFFFFF;\n}\n\n/* placeholder colorint */\n::-webkit-input-placeholder { /* Chrome */\n  color: #FFFFFF;\n}\n:-ms-input-placeholder { /* IE 10+ */\n  color: #FFFFFF;\n}\n::-moz-placeholder { /* Firefox 19+ */\n  color: #FFFFFF;\n  opacity: 1;\n}\n:-moz-placeholder { /* Firefox 4 - 18 */\n  color: #FFFFFF;\n  opacity: 1;\n}\n\n.form button {\n  width: 5%;\n}\n\n.places{\n    margin: auto;\n    width: 70%;\n}\n\n.places button {\n  color: #FFFFFF;\n  width: 10%;\n  padding: 5px;\n}\n\n.onePlace {\n    border: solid #FFFFFF;\n    border-radius: 2%;\n    margin: 5px;\n    margin-top: 10px;\n    text-align: left;\n    min-height: 200px;\n}\n\n.image {\n  text-align: center;\n  width: 30%;\n  padding: 3px;\n  margin-right: 5px;\n}\n\n.placeInfo {\n  min-height: 150px;\n  clear: both;\n  float: right;\n  width: 65%;\n}\n\nimg {\n  max-width:100%;\n  max-height:150px;\n  height: auto;\n  width:auto;\n}\n", ""]);
 
 // exports
 
