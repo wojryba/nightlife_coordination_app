@@ -11,9 +11,9 @@ getSearchResults(location) {
   let data = JSON.stringify({location});
   let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
   let options = new RequestOptions({ headers: headers });
-
   return this.http.post('api/search', data, options)
 }
+
 
 addToPlace(place, query) {
   let data = JSON.stringify({place, query});
