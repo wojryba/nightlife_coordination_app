@@ -12,14 +12,14 @@ getSearchResults(location) {
   let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
   let options = new RequestOptions({ headers: headers });
 
-  return this.http.post('/api/search', data, options)
+  return this.http.post('http://localhost:3000/api/search', data, options)
 }
 
-addToPlace(place) {
-  let data = JSON.stringify({place});
+addToPlace(place, query) {
+  let data = JSON.stringify({place, query});
   let headers =new Headers({ 'Content-Type': 'application/json;charset=utf-8'});
   let options = new RequestOptions({headers: headers});
-  return this.authHttp.post('api/add', data, options)
+  return this.authHttp.post('http://localhost:3000/api/add', data, options)
 }
 
 }

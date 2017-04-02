@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   animations: [
+    // animations for displaing locations
     trigger(
       'enterAnimation', [
         transition(':enter', [
@@ -19,7 +20,7 @@ import { AuthService } from '../../services/auth.service';
     )
   ]
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
   public form: FormGroup;
   public locations:any;
 
@@ -31,15 +32,16 @@ export class HomeComponent implements OnInit, OnDestroy {
       location: ['']
     });
 
+    // check if user is logged in and if so set locations
     setTimeout(() => {this.getQuery()}, 500);
-  }
-
-  ngOnDestroy() {
   }
 
   getQuery() {
     if (this.auth.authenticated()) {
+      // if user is logged in,
+      // get the query from localStorage
       let query = JSON.parse(localStorage.getItem('query'));
+      //  and make API call to get locations
       this.data.getSearchResults(query).subscribe(
         resonse => {
           this.locations = JSON.parse(resonse['_body']);
@@ -49,16 +51,19 @@ export class HomeComponent implements OnInit, OnDestroy {
         () => console.log("cmoplete")
       )
     } else {
+      // if user is not logged in do nothing
       console.log("not loged in");
     }
   }
 
   onSubmit(){
+    // save the query to localStorage for use after login
     localStorage.setItem('query', JSON.stringify(this.form.value.location));
+    // make API calls for locatons
     this.data.getSearchResults(this.form.value.location).subscribe(
       resonse => {
+        // set recived locations to be displeyed
         this.locations = JSON.parse(resonse['_body']);
-        console.log(this.locations);
       },
       error => console.log(error),
       () => console.log("cmoplete")
@@ -67,13 +72,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 onClick(i){
   if (this.auth.authenticated()) {
-    this.data.addToPlace(this.locations[i].id).subscribe(
+    // make API call to add or remove user to given location
+    this.data.addToPlace(this.locations[i].id, this.locations).subscribe(
       response => {
-        if (response['_body'] == "user added") {
-          this.locations[i].counter = this.locations[i].counter + 1;
-        } else if (response['_body'] == "user removed") {
-          this.locations[i].counter = this.locations[i].counter - 1;
-        }
+        // response is current counter. set it to the proper location
+        this.locations[i].counter = JSON.parse(response['_body']);
       },
       error => console.log(error),
       () => console.log("complete")

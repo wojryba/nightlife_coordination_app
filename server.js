@@ -11,6 +11,9 @@ const port = process.env.PORT || 3000;
 
 var connect = process.env.MONGODB_URI ||  "mongodb://localhost/nightlife-app";
 
+//plug in promise liblary
+mongoose.Promise = global.Promise;
+
 mongoose.connect(connect);
 mongoose.connection.on("connected", function(){
   console.log("Connected to db");
