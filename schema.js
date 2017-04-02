@@ -9,5 +9,13 @@ const UserSchema = new Schema({
 
 UserSchema.plugin(findOrCreate);
 
+const locationSchema = new Schema({
+  location: String,
+  users: {type: Array, default: []}
+});
+
+locationSchema.plugin(findOrCreate);
+const Location = mongoose.model('Location', locationSchema);
+
 const User = mongoose.model('User', UserSchema);
-module.exports = User;
+module.exports = Location;

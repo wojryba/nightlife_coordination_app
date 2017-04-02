@@ -30,10 +30,10 @@ var ApiServiceService = (function () {
         var data = JSON.stringify({ location: location });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json;charset=utf-8' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
-        return this.http.post('/api/search', data, options);
+        return this.http.post('api/search', data, options);
     };
-    ApiServiceService.prototype.addToPlace = function (place) {
-        var data = JSON.stringify({ place: place });
+    ApiServiceService.prototype.addToPlace = function (place, query) {
+        var data = JSON.stringify({ place: place, query: query });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json;charset=utf-8' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
         return this.authHttp.post('api/add', data, options);
@@ -269,41 +269,43 @@ var HomeComponent = (function () {
         this.form = this.fb.group({
             location: ['']
         });
+        // check if user is logged in and if so set locations
         setTimeout(function () { _this.getQuery(); }, 500);
-    };
-    HomeComponent.prototype.ngOnDestroy = function () {
     };
     HomeComponent.prototype.getQuery = function () {
         var _this = this;
         if (this.auth.authenticated()) {
+            // if user is logged in,
+            // get the query from localStorage
             var query = JSON.parse(localStorage.getItem('query'));
+            //  and make API call to get locations
             this.data.getSearchResults(query).subscribe(function (resonse) {
                 _this.locations = JSON.parse(resonse['_body']);
                 console.log(_this.locations);
             }, function (error) { return console.log(error); }, function () { return console.log("cmoplete"); });
         }
         else {
+            // if user is not logged in do nothing
             console.log("not loged in");
         }
     };
     HomeComponent.prototype.onSubmit = function () {
         var _this = this;
+        // save the query to localStorage for use after login
         localStorage.setItem('query', JSON.stringify(this.form.value.location));
+        // make API calls for locatons
         this.data.getSearchResults(this.form.value.location).subscribe(function (resonse) {
+            // set recived locations to be displeyed
             _this.locations = JSON.parse(resonse['_body']);
-            console.log(_this.locations);
         }, function (error) { return console.log(error); }, function () { return console.log("cmoplete"); });
     };
     HomeComponent.prototype.onClick = function (i) {
         var _this = this;
         if (this.auth.authenticated()) {
-            this.data.addToPlace(this.locations[i].id).subscribe(function (response) {
-                if (response['_body'] == "user added") {
-                    _this.locations[i].counter = _this.locations[i].counter + 1;
-                }
-                else if (response['_body'] == "user removed") {
-                    _this.locations[i].counter = _this.locations[i].counter - 1;
-                }
+            // make API call to add or remove user to given location
+            this.data.addToPlace(this.locations[i].id, this.locations).subscribe(function (response) {
+                // response is current counter. set it to the proper location
+                _this.locations[i].counter = JSON.parse(response['_body']);
             }, function (error) { return console.log(error); }, function () { return console.log("complete"); });
         }
         else {
@@ -316,6 +318,7 @@ var HomeComponent = (function () {
             template: __webpack_require__(466),
             styles: [__webpack_require__(463)],
             animations: [
+                // animations for displaing locations
                 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('enterAnimation', [
                     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["transition"])(':enter', [
                         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({ transform: 'translateY(-15%)', opacity: 0 }),
